@@ -34,23 +34,34 @@ public class ProductService {
 
         try {
 
-            JSONArray productDataArray = new JSONArray(itemData);
+            JSONObject productData = new JSONObject(itemData);
 
-            for (int i = 0; i < productDataArray.length(); i++) {
+            ItemsEntity itemsEntity = new ItemsEntity();
+            itemsEntity.setGid(UUID.randomUUID());
+            itemsEntity.setItemName(productData.getString("productName"));
+            itemsEntity.setItemCost(productData.getInt("productCost"));
+            itemsEntity.setItemDescription(productData.getString("productDescription"));
+            itemsEntity.setImagepath(productData.getString("productImage"));
 
-                JSONObject productData = productDataArray.getJSONObject(i);
+            itemsRepo.save(itemsEntity);
 
-                ItemsEntity itemsEntity = new ItemsEntity();
-                itemsEntity.setItemId(productData.getInt("itemId"));
-                itemsEntity.setGid(UUID.randomUUID());
-                itemsEntity.setDate(productData.getString("date"));
-                itemsEntity.setItemName(productData.getString("itemName"));
-                itemsEntity.setItemCost(productData.getInt("itemCost"));
-                itemsEntity.setItemDescription(productData.getString("itemDescription"));
-
-                itemsRepo.save(itemsEntity);
-
-            }
+//            JSONArray productDataArray = new JSONArray(itemData);
+//
+//            for (int i = 0; i < productDataArray.length(); i++) {
+//
+//                JSONObject productData = productDataArray.getJSONObject(i);
+//
+//                ItemsEntity itemsEntity = new ItemsEntity();
+//                itemsEntity.setItemId(productData.getInt("itemId"));
+//                itemsEntity.setGid(UUID.randomUUID());
+//                itemsEntity.setDate(productData.getString("date"));
+//                itemsEntity.setItemName(productData.getString("itemName"));
+//                itemsEntity.setItemCost(productData.getInt("itemCost"));
+//                itemsEntity.setItemDescription(productData.getString("itemDescription"));
+//
+//                itemsRepo.save(itemsEntity);
+//
+//            }
 
 
         } catch (JSONException e) {
@@ -70,7 +81,6 @@ public class ProductService {
         for (ItemsEntity itemsEntity : itemsEntities) {
 
             ItemsPojo itemsPojo = new ItemsPojo();
-            itemsPojo.setItemId(itemsEntity.getItemId());
             itemsPojo.setDate(itemsEntity.getDate());
             itemsPojo.setGid(itemsEntity.getGid());
             itemsPojo.setItemName(itemsEntity.getItemName());

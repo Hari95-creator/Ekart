@@ -7,24 +7,13 @@ import java.util.UUID;
 
 @Document(collection = "product_details")
 public class ItemsEntity {
-
-    @Id
-    private int itemId;
     private UUID gid;
     private String date;
     private String itemName;
-
     private int itemCost;
     private String itemDescription;
 
-
-    public int getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
-    }
+    private String imagepath;
 
     public UUID getGid() {
         return gid;
@@ -64,5 +53,13 @@ public class ItemsEntity {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
     }
 }
